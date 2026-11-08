@@ -9,8 +9,8 @@
 :root {
   color-scheme: dark;
   --bg-base: #0a1524;
-  /* Background photo: blue sky with clouds, from Unsplash (Unsplash License)
-     https://images.unsplash.com/photo-1597200381847-30ec200eeb9a */
+  /* Background photo: pastel pink-and-blue sunset sky, from Unsplash (Unsplash License)
+     https://images.unsplash.com/photo-1514477917009-389c76a86b68 */
   --sky-photo: url("sky.webp");
   --sky-blur: 28px;   /* the frosted "liquid glass" blur over the whole photo */
   /* Navy tint over the blurred photo, a little lighter at the top like light through glass */
