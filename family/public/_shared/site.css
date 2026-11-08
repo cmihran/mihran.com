@@ -13,15 +13,19 @@
     radial-gradient(820px 620px at -12% 112%, rgba(140, 228, 190, .42), transparent 62%),
     radial-gradient(520px 420px at 45% 45%, rgba(255, 255, 255, .55), transparent 70%),
     linear-gradient(170deg, #e2f1fc 0%, #f4faff 52%, #e8f6f0 100%);
-  /* Background photos (CC0, from Wikimedia Commons):
-     sky-day.webp   "Sea sky and clouds, Ibiza, Spain" by José Lodos Benavente (Joselodos)
-                    https://commons.wikimedia.org/wiki/File:Sea_sky_and_clouds,_Ibiza,_Spain.jpg
-     sky-night.webp "Sky Clouds Sea"
+  /* Background photos:
+     sky-day.webp   Blue sky with clouds, from Unsplash (Unsplash License)
+                    https://images.unsplash.com/photo-1597200381847-30ec200eeb9a
+     sky-night.webp "Sky Clouds Sea" (CC0, Wikimedia Commons)
                     https://commons.wikimedia.org/wiki/File:Sky_Clouds_Sea.jpg */
   --sky-photo: url("sky-day.webp");
   --sky-wash: linear-gradient(180deg, rgba(240, 248, 255, .30) 0%, rgba(240, 248, 255, .20) 45%, rgba(236, 245, 252, .60) 100%);
   --fg: #12263a;
-  --muted: #4d6276;
+  --muted: #34495d;
+  /* Soft white glow behind text that sits directly on the sky (the Vista/7 title-bar trick) */
+  --text-glow: 0 0 18px rgba(255, 255, 255, .7), 0 0 3px rgba(255, 255, 255, .5);
+  --eyebrow-fill: linear-gradient(90deg, #0a58a0, #0b7a77);
+  --eyebrow-glow: drop-shadow(0 0 6px rgba(255, 255, 255, .85));
   --line: rgba(18, 38, 58, .10);
   --accent: #0a6dbf;
   --accent-2: #13a19e;
@@ -56,7 +60,10 @@
     --sky-photo: url("sky-night.webp");
     --sky-wash: linear-gradient(180deg, rgba(8, 16, 26, .55) 0%, rgba(8, 16, 26, .68) 100%);
     --fg: #e4eef6;
-    --muted: #9cb1c3;
+    --muted: #a9bccc;
+    --text-glow: 0 1px 14px rgba(0, 0, 0, .35);
+    --eyebrow-fill: linear-gradient(90deg, var(--accent), var(--accent-2));
+    --eyebrow-glow: none;
     --line: rgba(255, 255, 255, .08);
     --accent: #62bcff;
     --accent-2: #4fd6c4;
@@ -245,11 +252,13 @@ main {
   font: 600 14px var(--font-body);
   letter-spacing: .02em;
   color: var(--accent);
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  background: var(--eyebrow-fill);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: var(--eyebrow-glow);
 }
+main > h1, main > h2, .lede, footer { text-shadow: var(--text-glow); }
 h1 {
   font: 600 clamp(38px, 6.5vw, 58px)/1.08 var(--font-display);
   letter-spacing: -.025em;
