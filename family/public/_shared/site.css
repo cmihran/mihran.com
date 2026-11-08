@@ -13,6 +13,13 @@
     radial-gradient(820px 620px at -12% 112%, rgba(140, 228, 190, .42), transparent 62%),
     radial-gradient(520px 420px at 45% 45%, rgba(255, 255, 255, .55), transparent 70%),
     linear-gradient(170deg, #e2f1fc 0%, #f4faff 52%, #e8f6f0 100%);
+  /* Background photos (CC0, from Wikimedia Commons):
+     sky-day.webp   "Sea sky and clouds, Ibiza, Spain" by José Lodos Benavente (Joselodos)
+                    https://commons.wikimedia.org/wiki/File:Sea_sky_and_clouds,_Ibiza,_Spain.jpg
+     sky-night.webp "Sky Clouds Sea"
+                    https://commons.wikimedia.org/wiki/File:Sky_Clouds_Sea.jpg */
+  --sky-photo: url("sky-day.webp");
+  --sky-wash: linear-gradient(180deg, rgba(240, 248, 255, .30) 0%, rgba(240, 248, 255, .20) 45%, rgba(236, 245, 252, .60) 100%);
   --fg: #12263a;
   --muted: #4d6276;
   --line: rgba(18, 38, 58, .10);
@@ -46,6 +53,8 @@
       radial-gradient(900px 620px at 92% -12%, rgba(40, 130, 205, .34), transparent 62%),
       radial-gradient(820px 620px at -12% 112%, rgba(30, 150, 120, .24), transparent 62%),
       linear-gradient(170deg, #0a1520 0%, #0c1a27 52%, #0a1b1c 100%);
+    --sky-photo: url("sky-night.webp");
+    --sky-wash: linear-gradient(180deg, rgba(8, 16, 26, .55) 0%, rgba(8, 16, 26, .68) 100%);
     --fg: #e4eef6;
     --muted: #9cb1c3;
     --line: rgba(255, 255, 255, .08);
@@ -82,13 +91,14 @@ body {
   display: flex;
   flex-direction: column;
 }
-/* The sky sits on a fixed layer so it doesn't scroll (and works on iOS). */
+/* The sky sits on a fixed layer so it doesn't scroll (and works on iOS):
+   a wash for text contrast, over the photo, over the gradient (shown while the photo loads). */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: var(--sky);
+  background: var(--sky-wash), var(--sky-photo) center 30% / cover no-repeat, var(--sky);
   pointer-events: none;
 }
 a { color: inherit; }
@@ -323,7 +333,7 @@ footer {
   max-width: calc(var(--page-w) - 2 * var(--pad));
   margin: 0 auto;
   padding: 28px 0;
-  color: var(--muted);
+  color: var(--fg);  /* full-strength text: the footer sits over the darker sea */
   font-size: 13px;
   border-top: 1px solid var(--line);
 }
