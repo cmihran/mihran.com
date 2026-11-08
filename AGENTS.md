@@ -16,7 +16,7 @@ This repo holds the Mihran family's websites on `mihran.com`. Each site is a pla
 
 All the sites share one look and one sidebar. Both come from files in `family/public/_shared/`, which are served from mihran.com:
 
-- `site.css` (`https://mihran.com/_shared/site.css`): the colors (with automatic light and dark mode), fonts, and layout. That includes the left sidebar, which becomes a top bar with a Menu button on screens narrower than 820px. It also styles the page pieces: `.eyebrow`, `h1`, `.lede`, `.cards`/`.card`, and `.pills`.
+- `site.css` (`https://mihran.com/_shared/site.css`): the colors (with automatic light and dark mode), fonts, and layout. That includes the left sidebar, which becomes a top bar with a Menu button on screens narrower than 820px. It also styles the page pieces: `.eyebrow`, `h1`, `.lede`, `.cards`/`.card`, and `.pills`. LinkedIn and GitHub links in `.pills` or the sidebar get their brand icon automatically, matched by the link's `href`, so don't add icon markup. To support another site, add a matching `a[href*="…"] { --icon: url(...) }` rule.
 - `nav.js` (`https://mihran.com/_shared/nav.js`): the **only place the sidebar links are defined** (the `SITE` array). It builds the sidebar and highlights the current page.
 
 Every page loads both from `https://mihran.com/...` and uses this skeleton:
