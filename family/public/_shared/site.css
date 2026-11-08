@@ -31,7 +31,8 @@
   /* Glass recipe */
   --glass: rgba(255, 255, 255, .07);
   --glass-hover: rgba(255, 255, 255, .11);
-  --glass-strong: rgba(16, 30, 48, .78);
+  --glass-strong: rgba(9, 20, 37, .86);   /* popup menu */
+  --glass-bar: rgba(9, 20, 37, .42);      /* top bar */
   --glass-solid: #13233a;
   --glass-edge: rgba(255, 255, 255, .14);
   --glass-shine: linear-gradient(180deg, rgba(255, 255, 255, .12) 0%, rgba(255, 255, 255, .02) 50%, rgba(255, 255, 255, 0) 100%);
@@ -47,10 +48,10 @@
 }
 /* No blur support, or the user asked for less transparency: use solid panels. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  :root { --glass: var(--glass-solid); --glass-hover: var(--glass-solid); --glass-strong: var(--glass-solid); }
+  :root { --glass: var(--glass-solid); --glass-hover: var(--glass-solid); --glass-strong: var(--glass-solid); --glass-bar: var(--glass-solid); }
 }
 @media (prefers-reduced-transparency: reduce) {
-  :root { --glass: var(--glass-solid); --glass-hover: var(--glass-solid); --glass-strong: var(--glass-solid); }
+  :root { --glass: var(--glass-solid); --glass-hover: var(--glass-solid); --glass-strong: var(--glass-solid); --glass-bar: var(--glass-solid); }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -121,6 +122,10 @@ a { color: inherit; }
   inset: 0;
   z-index: -1;
   border-radius: inherit;
+  /* Darker than the other glass, with less color boost, so the bar doesn't glow bright blue */
+  background-color: var(--glass-bar);
+  -webkit-backdrop-filter: blur(18px) saturate(115%);
+          backdrop-filter: blur(18px) saturate(115%);
 }
 /* "mihran.com" in the bar, in the same blue-to-aqua gradient as .eyebrow */
 .sidebar .brand {
@@ -143,6 +148,8 @@ a { color: inherit; }
   color: var(--fg);
   border-radius: 999px;
   cursor: pointer;
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
   transition: background-color .15s, color .15s;
 }
 .sidebar .menu-toggle:hover { background-color: var(--glass-hover); color: var(--accent); }
