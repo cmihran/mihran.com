@@ -2,6 +2,8 @@
 
 This repo holds the Mihran family's websites on `mihran.com`. Each site is a plain static HTML site, and each one is deployed as its own Cloudflare Worker.
 
+> **Both the repo and the sites are public.** The GitHub repo `cmihran/mihran.com` is public, and so is everything served from `mihran.com` and its subdomains. Never commit secrets, tokens, account IDs, or personal email addresses, and don't put them in commit messages. Look them up with `cf` when you need them. Remember that git history is public too: removing something in a later commit doesn't hide it.
+
 ## Layout
 
 | Folder     | Worker name      | Domains                          | What it is                         |
