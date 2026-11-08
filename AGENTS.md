@@ -22,7 +22,7 @@ All the sites share one look and one navigation menu. Both come from files in `f
 Every page loads both from `https://mihran.com/...` and uses this skeleton:
 
 ```html
-<aside class="sidebar" id="site-nav"><a class="brand" href="https://mihran.com/">Mihran</a></aside>
+<aside class="sidebar" id="site-nav"><a class="brand" href="https://mihran.com/">mihran.com</a></aside>
 <div class="content"><main>…</main><footer>…</footer></div>
 ```
 

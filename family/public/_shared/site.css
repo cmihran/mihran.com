@@ -122,10 +122,16 @@ a { color: inherit; }
   z-index: -1;
   border-radius: inherit;
 }
+/* "mihran.com" in the bar, in the same blue-to-aqua gradient as .eyebrow */
 .sidebar .brand {
-  font: 700 20px/1 var(--font-display);
+  font: 700 20px/1.2 var(--font-display);
   letter-spacing: -.01em;
   text-decoration: none;
+  color: var(--accent);
+  background: var(--eyebrow-fill);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Burger button: three lines that turn into an X when open */

@@ -1,6 +1,6 @@
 // Shared top bar + burger menu for every *.mihran.com site — the single source of truth for navigation.
 // Served from https://mihran.com/_shared/nav.js — deploy family/ to update it everywhere.
-// Each page needs: <aside class="sidebar" id="site-nav"><a class="brand" href="https://mihran.com/">Mihran</a></aside>
+// Each page needs: <aside class="sidebar" id="site-nav"><a class="brand" href="https://mihran.com/">mihran.com</a></aside>
 (() => {
   const SITE = [
     { label: "Home", href: "https://mihran.com/", hosts: ["mihran.com", "www.mihran.com"] },
