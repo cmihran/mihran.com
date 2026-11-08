@@ -8,38 +8,43 @@
 
 :root {
   color-scheme: dark;
-  --bg-base: #0a1524;
+  --bg-base: #17112a;
   /* Background photo: pastel pink-and-blue sunset sky, from Unsplash (Unsplash License)
      https://images.unsplash.com/photo-1514477917009-389c76a86b68 */
   --sky-photo: url("sky.webp");
-  --sky-blur: 28px;   /* the frosted "liquid glass" blur over the whole photo */
-  /* Navy tint over the blurred photo, a little lighter at the top like light through glass */
+  /* Light enough that cloud shapes survive, so the glass panels have something to frost */
+  --sky-blur: 12px;
+  /* Dusky violet tint over the photo (keeps the sunset pinks instead of turning them gray),
+     a little lighter at the top like light through glass */
   --sky-wash:
-    radial-gradient(1200px 700px at 50% -10%, rgba(120, 180, 255, .10), transparent 70%),
-    linear-gradient(180deg, rgba(6, 14, 30, .58) 0%, rgba(6, 14, 30, .72) 100%);
-  --fg: #e8f0f8;
-  --muted: #a9bdd0;
+    radial-gradient(1200px 700px at 50% -10%, rgba(255, 190, 220, .10), transparent 70%),
+    linear-gradient(180deg, rgba(24, 16, 44, .46) 0%, rgba(18, 12, 34, .64) 100%);
+  --fg: #f6f0fa;
+  --muted: #cbbfd8;
   --text-glow: 0 1px 14px rgba(0, 0, 0, .35);
-  --eyebrow-fill: linear-gradient(90deg, var(--accent), var(--accent-2));
-  --eyebrow-glow: none;
-  --line: rgba(255, 255, 255, .10);
-  --accent: #6cc2ff;
-  --accent-2: #5fe0cf;
-  --accent-soft: rgba(108, 194, 255, .12);
-  --accent-glow: rgba(108, 194, 255, .20);
+  /* Sunset gradient: peach → pink → lilac (title, bar text, small labels) */
+  --eyebrow-fill: linear-gradient(90deg, #ffc49c 0%, #ff97bf 50%, #c6a8ff 100%);
+  --eyebrow-glow: drop-shadow(0 0 10px rgba(255, 150, 190, .35));
+  --line: rgba(255, 255, 255, .12);
+  --accent: #ffa9c9;
+  --accent-2: #c6a8ff;
+  --accent-soft: rgba(255, 169, 201, .13);
+  --accent-glow: rgba(255, 169, 201, .24);
 
   /* Glass recipe */
-  --glass: rgba(255, 255, 255, .07);
-  --glass-hover: rgba(255, 255, 255, .11);
-  --glass-strong: rgba(9, 20, 37, .80);   /* popup menu */
-  --glass-tint: rgba(9, 20, 37, .30);      /* top bar and page cards */
-  --blur-tint: blur(18px) saturate(115%); /* less color boost, so they don't glow bright blue */
-  --glass-solid: #13233a;
-  --glass-edge: rgba(255, 255, 255, .14);
-  --glass-shine: linear-gradient(180deg, rgba(255, 255, 255, .12) 0%, rgba(255, 255, 255, .02) 50%, rgba(255, 255, 255, 0) 100%);
+  --glass: rgba(255, 255, 255, .08);
+  --glass-hover: rgba(255, 255, 255, .13);
+  --glass-strong: rgba(26, 18, 44, .84);   /* popup menu */
+  --glass-tint: rgba(26, 18, 44, .38);      /* top bar and page cards */
+  --blur-tint: blur(20px) saturate(120%);
+  --glass-solid: #241a3a;
+  --glass-edge: rgba(255, 255, 255, .20);
+  --glass-shine: linear-gradient(180deg, rgba(255, 255, 255, .16) 0%, rgba(255, 255, 255, .03) 50%, rgba(255, 255, 255, 0) 100%);
+  /* Brighter top edge and a deeper shadow so panels lift off the background */
   --glass-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, .16),
-    0 12px 32px -8px rgba(0, 0, 0, .45);
+    inset 0 1px 0 rgba(255, 255, 255, .28),
+    inset 0 0 0 1px rgba(255, 255, 255, .03),
+    0 18px 40px -12px rgba(8, 4, 20, .60);
   --blur: blur(18px) saturate(170%);
 
   --page-w: 800px;   /* column width for the top bar, content, and footer */
@@ -225,12 +230,17 @@ a { color: inherit; }
 
 /* ---------- Content ---------- */
 .content { flex: 1; display: flex; flex-direction: column; }
+/* Content is centered vertically between the bar and the footer (a bit above true center) */
 main {
   flex: 1;
   width: 100%;
   max-width: var(--page-w);
   margin: 0 auto;
-  padding: 12vh var(--pad) 64px;
+  padding: 48px var(--pad) 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 .eyebrow {
   display: inline-block;
@@ -249,7 +259,7 @@ h1 {
   letter-spacing: -.025em;
   margin: 8px 0 16px;
 }
-/* Blue-to-aqua gradient text, like .eyebrow (used for the home page title) */
+/* Sunset gradient text, like .eyebrow (used for the big home page title) */
 .gradient-text {
   width: fit-content;
   color: var(--accent);
@@ -258,8 +268,13 @@ h1 {
           background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-/* text-shadow would paint over the gradient, so use a drop-shadow filter instead */
-main > h1.gradient-text { text-shadow: none; filter: drop-shadow(0 2px 12px rgba(0, 0, 0, .25)); }
+/* Bigger, with a soft pink glow so it pops off the sky.
+   (text-shadow would paint over the gradient, so this uses drop-shadow filters.) */
+main > h1.gradient-text {
+  font-size: clamp(48px, 10vw, 88px);
+  text-shadow: none;
+  filter: drop-shadow(0 0 24px rgba(255, 150, 190, .40)) drop-shadow(0 2px 10px rgba(10, 4, 24, .35));
+}
 h2 {
   font: 600 24px/1.25 var(--font-display);
   letter-spacing: -.01em;
@@ -270,9 +285,10 @@ main p + p { margin-top: 1em; }
 
 /* Cards: big clickable glass tiles */
 .cards {
+  align-self: stretch;  /* full column width */
   margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));  /* cards stretch to fill the row; stack on phones */
   gap: 16px;
 }
 .card {
@@ -293,6 +309,48 @@ a.card:hover {
 .card strong { display: block; font: 600 20px/1.3 var(--font-display); }
 .card span { display: block; color: var(--muted); font-size: 15px; margin-top: 2px; }
 .card em { display: block; font-style: normal; color: var(--accent); font-weight: 600; font-size: 14px; margin-top: 10px; }
+
+/* Avatar: a glossy Aero-style orb with an initial, placed left of the card text.
+   Placeholder until there are real photos. Set --orb on a card to change its colors. */
+.card:has(.avatar) {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 18px;
+  align-items: center;
+}
+.card .avatar {
+  grid-row: 1 / span 3;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  font: 700 26px/1 var(--font-display);
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(70, 20, 70, .45);
+  background:
+    radial-gradient(circle at 50% 115%, rgba(255, 255, 255, .45), transparent 55%),  /* glow from below */
+    var(--orb, linear-gradient(160deg, #ffbe94, #ff88b5 55%, #b18cff));
+  box-shadow:
+    inset 0 -6px 12px rgba(70, 20, 110, .35),
+    inset 0 1px 0 rgba(255, 255, 255, .6),
+    0 8px 18px -6px rgba(255, 120, 180, .55);
+}
+/* The glossy highlight across the top half of the orb */
+.card .avatar::before {
+  content: "";
+  position: absolute;
+  left: 13%;
+  right: 13%;
+  top: 5%;
+  height: 46%;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .75), rgba(255, 255, 255, .06));
+}
+.cards .card:nth-child(even) .avatar { --orb: linear-gradient(160deg, #c3b2ff, #8fa2ff 55%, #6fc3ff); }
 
 /* Pills: row of small glossy glass buttons */
 .pills { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 10px; }
