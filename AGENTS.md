@@ -37,6 +37,10 @@ Every site folder has the same files:
 
 `node_modules/` and `.cloudflare/` (build output) are gitignored.
 
+## Local preview
+
+Run `node preview.mjs` from the repo root (no dependencies) and open http://localhost:4321/. Each person's site is served at `http://<name>.localhost:4321/`. The server rewrites every `https://…mihran.com` URL to the local server, so the pages use `_shared/` from your working copy instead of production. Pass a port as an argument if 4321 is taken.
+
 ## Working rules
 
 - **Commit eagerly, without asking.** When you finish a feature or fix, commit it right away with a clear message. Don't wait for the user to say so, and don't ask first.
