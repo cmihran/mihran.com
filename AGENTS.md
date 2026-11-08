@@ -26,6 +26,8 @@ Every page loads both from `https://mihran.com/...` and uses this skeleton:
 <div class="content"><main>…</main><footer>…</footer></div>
 ```
 
+The home page (`family/`) is the one exception: its `<aside>` is empty (no brand link), because its title already says "mihran.com", shown with `<h1 class="gradient-text">`.
+
 To change the style or the menu links, edit `_shared/` and **deploy `family/` only**. Every site picks up the change right away. Don't copy the CSS into individual pages.
 
 Every site folder has the same files:
