@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Mihran Family</title>
+  <meta name="description" content="Home of the Mihran family.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏡</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf7f2;
+      --fg: #2b2622;
+      --muted: #7a6f66;
+      --accent: #a4523a;
+      --card: #ffffff;
+      --line: #e8e1d7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1714;
+        --fg: #f1ebe3;
+        --muted: #a89c90;
+        --accent: #e08a6c;
+        --card: #24201c;
+        --line: #3a332c;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font: 400 17px/1.6 Inter, system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 18vh 24px 64px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+    h1 {
+      font: 600 clamp(44px, 9vw, 76px)/1.05 Fraunces, Georgia, serif;
+      letter-spacing: -.02em;
+      margin: 12px 0 20px;
+    }
+    .lede { color: var(--muted); font-size: 19px; max-width: 34em; }
+    .people {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .person {
+      display: block;
+      padding: 20px 22px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color .15s, transform .15s;
+    }
+    a.person:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .person strong { font: 600 20px Fraunces, Georgia, serif; display: block; }
+    .person span { color: var(--muted); font-size: 14px; }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 32px 24px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">mihran.com</p>
+    <h1>The Mihran Family</h1>
+    <p class="lede">Welcome to our little corner of the internet.</p>
+
+    <section class="people" aria-label="Family members">
+      <a class="person" href="https://charlie.mihran.com">
+        <strong>Charlie</strong>
+        <span>charlie.mihran.com →</span>
+      </a>
+      <a class="person" href="https://greg.mihran.com">
+        <strong>Greg</strong>
+        <span>greg.mihran.com →</span>
+      </a>
+    </section>
+  </main>
+  <footer>© <span id="y">2026</span> The Mihran Family</footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Greg Mihran · KJ6ER</title>
+  <meta name="description" content="Greg Mihran, amateur radio operator KJ6ER.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📻</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #16181d;
+      --muted: #6b7280;
+      --accent: #c2410c;
+      --line: #e5e7eb;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1115;
+        --fg: #e8eaee;
+        --muted: #9aa1ad;
+        --accent: #fb923c;
+        --line: #262a33;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font: 400 17px/1.65 Inter, system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 20vh 24px 64px;
+    }
+    .call {
+      font: 500 14px "JetBrains Mono", ui-monospace, monospace;
+      letter-spacing: .14em;
+      color: var(--accent);
+    }
+    h1 { font-size: clamp(36px, 7vw, 52px); font-weight: 600; letter-spacing: -.03em; line-height: 1.1; margin-top: 8px; }
+    .lede { color: var(--muted); font-size: 19px; margin-top: 14px; }
+    .feature {
+      display: block;
+      margin-top: 40px;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color .15s, transform .15s;
+    }
+    .feature:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .feature strong { display: block; font-size: 19px; font-weight: 600; }
+    .feature span { color: var(--muted); font-size: 15px; }
+    .feature em { font-style: normal; color: var(--accent); font-weight: 500; font-size: 15px; display: block; margin-top: 10px; }
+    nav { margin-top: 20px; }
+    nav a { color: var(--muted); font-size: 15px; }
+    footer { text-align: center; color: var(--muted); font-size: 13px; padding: 32px 24px; }
+    footer a { color: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="call">KJ6ER</p>
+    <h1>Greg Mihran</h1>
+    <p class="lede">Amateur radio operator and antenna builder.</p>
+
+    <a class="feature" href="https://kj6er.net/">
+      <strong>KJ6ER Antenna Plans</strong>
+      <span>Free portable HF antenna designs.</span>
+      <em>kj6er.net →</em>
+    </a>
+
+    <nav><a href="https://mihran.com">← Mihran family home</a></nav>
+  </main>
+  <footer><a href="https://mihran.com">mihran.com</a></footer>
+</body>
+</html>
