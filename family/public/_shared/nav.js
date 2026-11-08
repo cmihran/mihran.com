@@ -4,24 +4,8 @@
 (() => {
   const SITE = [
     { label: "Home", href: "https://mihran.com/", hosts: ["mihran.com", "www.mihran.com"] },
-    {
-      label: "Charlie",
-      href: "https://charlie.mihran.com/",
-      hosts: ["charlie.mihran.com"],
-      children: [
-        { label: "LinkedIn", href: "https://www.linkedin.com/in/cmihran/" },
-        { label: "GitHub", href: "https://github.com/cmihran" },
-      ],
-    },
-    {
-      label: "Greg",
-      href: "https://greg.mihran.com/",
-      hosts: ["greg.mihran.com"],
-      children: [
-        { label: "KJ6ER Antenna Plans", href: "https://kj6er.net/" },
-        { label: "LinkedIn", href: "https://www.linkedin.com/in/gregmihran/" },
-      ],
-    },
+    { label: "Charlie", href: "https://charlie.mihran.com/", hosts: ["charlie.mihran.com"] },
+    { label: "Greg", href: "https://greg.mihran.com/", hosts: ["greg.mihran.com"] },
   ];
 
   const aside = document.getElementById("site-nav");
