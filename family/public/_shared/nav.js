@@ -1,4 +1,4 @@
-// Shared sidebar for every *.mihran.com site — the single source of truth for navigation.
+// Shared top bar + burger menu for every *.mihran.com site — the single source of truth for navigation.
 // Served from https://mihran.com/_shared/nav.js — deploy family/ to update it everywhere.
 // Each page needs: <aside class="sidebar" id="site-nav"><a class="brand" href="https://mihran.com/">Mihran</a></aside>
 (() => {
@@ -32,13 +32,25 @@
     return a;
   };
 
-  const toggle = el("button", { class: "menu-toggle", type: "button", "aria-expanded": "false", "aria-controls": "site-nav-list" }, "Menu");
-  toggle.addEventListener("click", () => {
-    const open = aside.classList.toggle("open");
+  // Burger button that opens a popup menu.
+  const toggle = el("button", {
+    class: "menu-toggle", type: "button", "aria-label": "Menu",
+    "aria-expanded": "false", "aria-controls": "site-nav-menu",
+  }, el("span", { class: "burger", "aria-hidden": "true" }, el("span"), el("span"), el("span")));
+  const isOpen = () => aside.classList.contains("open");
+  const setOpen = (open) => {
+    aside.classList.toggle("open", open);
     toggle.setAttribute("aria-expanded", String(open));
+  };
+  toggle.addEventListener("click", () => setOpen(!isOpen()));
+  // Close on a click outside the bar, on Escape, or after choosing a link.
+  document.addEventListener("click", (e) => { if (isOpen() && !aside.contains(e.target)) setOpen(false); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isOpen()) { setOpen(false); toggle.focus(); }
   });
 
-  const list = el("ul", { class: "nav", id: "site-nav-list" });
+  const list = el("ul", { class: "nav" });
+  list.addEventListener("click", (e) => { if (e.target.closest("a")) setOpen(false); });
   for (const item of SITE) {
     const li = el("li", {}, link(item));
     if (item.children?.length) {
@@ -48,5 +60,5 @@
   }
 
   aside.setAttribute("aria-label", "Site");
-  aside.append(toggle, el("nav", {}, list), el("p", { class: "foot" }, "mihran.com"));
+  aside.append(toggle, el("nav", { id: "site-nav-menu" }, list));
 })();

@@ -14,10 +14,10 @@ This repo holds the Mihran family's websites on `mihran.com`. Each site is a pla
 
 ### Shared style and navigation
 
-All the sites share one look and one sidebar. Both come from files in `family/public/_shared/`, which are served from mihran.com:
+All the sites share one look and one navigation menu. Both come from files in `family/public/_shared/`, which are served from mihran.com:
 
-- `site.css` (`https://mihran.com/_shared/site.css`): the colors (with automatic light and dark mode), fonts, and layout. That includes the left sidebar, which becomes a top bar with a Menu button on screens narrower than 820px. It also styles the page pieces: `.eyebrow`, `h1`, `.lede`, `.cards`/`.card`, and `.pills`. LinkedIn and GitHub links in `.pills` or the sidebar get their brand icon automatically, matched by the link's `href`, so don't add icon markup. To support another site, add a matching `a[href*="…"] { --icon: url(...) }` rule.
-- `nav.js` (`https://mihran.com/_shared/nav.js`): the **only place the sidebar links are defined** (the `SITE` array). It builds the sidebar and highlights the current page.
+- `site.css` (`https://mihran.com/_shared/site.css`): the colors (with automatic light and dark mode), fonts, and layout. The style is a subtle "Frutiger Aero" / liquid glass look: a sky-gradient background with frosted-glass panels. The navigation is a floating glass bar at the top of every page, with a burger (☰) button that opens a popup menu. The `<aside>` still has `class="sidebar"` for historical reasons. The stylesheet also styles the page pieces: `.eyebrow`, `h1`, `.lede`, `.cards`/`.card`, and `.pills`. LinkedIn and GitHub links in `.pills` or the menu get their brand icon automatically, matched by the link's `href`, so don't add icon markup. To support another site, add a matching `a[href*="…"] { --icon: url(...) }` rule.
+- `nav.js` (`https://mihran.com/_shared/nav.js`): the **only place the menu links are defined** (the `SITE` array). It builds the burger button and popup menu and highlights the current page.
 
 Every page loads both from `https://mihran.com/...` and uses this skeleton:
 
@@ -26,7 +26,7 @@ Every page loads both from `https://mihran.com/...` and uses this skeleton:
 <div class="content"><main>…</main><footer>…</footer></div>
 ```
 
-To change the style or the sidebar links, edit `_shared/` and **deploy `family/` only**. Every site picks up the change right away. Don't copy the CSS into individual pages.
+To change the style or the menu links, edit `_shared/` and **deploy `family/` only**. Every site picks up the change right away. Don't copy the CSS into individual pages.
 
 Every site folder has the same files:
 
