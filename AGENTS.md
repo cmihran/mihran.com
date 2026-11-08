@@ -37,6 +37,11 @@ Every site folder has the same files:
 
 `node_modules/` and `.cloudflare/` (build output) are gitignored.
 
+## Working rules
+
+- **Commit eagerly, without asking.** When you finish a feature or fix, commit it right away with a clear message. Don't wait for the user to say so, and don't ask first.
+- **Deploy only when asked.** Never run `cf deploy` unless the user explicitly asks for a deploy. Finishing or committing a change is not a request to deploy it.
+
 ## Deploying
 
 Deploys use Cloudflare's `cf` CLI, which is still in beta. Each site deploys separately from its own folder:
