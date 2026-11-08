@@ -14,23 +14,23 @@
   --sky-photo: url("sky.webp");
   /* Light enough that cloud shapes survive, so the glass panels have something to frost */
   --sky-blur: 12px;
-  /* Dusky violet tint over the photo (keeps the sunset pinks instead of turning them gray),
+  /* Dusky slate tint over the photo: it mutes the sunset pinks into a cool lavender-gray,
      a little lighter at the top like light through glass */
   --sky-wash:
-    radial-gradient(1200px 700px at 50% -10%, rgba(255, 232, 242, .10), transparent 70%),
-    linear-gradient(180deg, rgba(24, 16, 44, .46) 0%, rgba(18, 12, 34, .64) 100%);
+    radial-gradient(1200px 700px at 50% -10%, rgba(232, 240, 255, .12), transparent 70%),
+    linear-gradient(180deg, rgba(31, 32, 54, .60) 0%, rgba(14, 16, 29, .80) 100%);
   --fg: #f6f0fa;
   --muted: #cbbfd8;
   --text-glow: 0 1px 14px rgba(0, 0, 0, .35);
   /* Sunset gradient: pale peach → blush → pale lilac (title, bar text, small labels).
-     Kept close to white so the pink stays subtle. */
-  --eyebrow-fill: linear-gradient(90deg, #ffdcc4 0%, #ffc4da 50%, #d9c6ff 100%);
-  --eyebrow-glow: drop-shadow(0 0 10px rgba(255, 210, 228, .28));
+     Kept close to white so the pink is only a hint. */
+  --eyebrow-fill: linear-gradient(90deg, #ffe2cf 0%, #ffdae6 50%, #dfd4ff 100%);
+  --eyebrow-glow: drop-shadow(0 0 10px rgba(255, 226, 238, .24));
   --line: rgba(255, 255, 255, .12);
-  --accent: #ffcde0;
-  --accent-2: #d9c6ff;
-  --accent-soft: rgba(255, 214, 230, .12);
-  --accent-glow: rgba(255, 214, 230, .22);
+  --accent: #ffe0ec;
+  --accent-2: #dfd4ff;
+  --accent-soft: rgba(255, 224, 236, .11);
+  --accent-glow: rgba(255, 224, 236, .20);
 
   /* Glass recipe */
   --glass: rgba(255, 255, 255, .08);
@@ -82,7 +82,7 @@ body::after {
 }
 body::before {
   background: var(--sky-photo) center / cover no-repeat;
-  filter: blur(var(--sky-blur)) saturate(130%);
+  filter: blur(var(--sky-blur)) saturate(55%);  /* muted so the sky reads cool, not pink */
   transform: scale(1.12);  /* hides the soft, see-through edges the blur creates */
 }
 body::after { background: var(--sky-wash); }
@@ -334,11 +334,11 @@ a.card:hover {
   text-shadow: 0 1px 3px rgba(70, 30, 80, .55);
   background:
     radial-gradient(circle at 50% 115%, rgba(255, 255, 255, .45), transparent 55%),  /* glow from below */
-    var(--orb, linear-gradient(160deg, #ffcfae, #ffadc9 55%, #c3a6ff));
+    var(--orb, linear-gradient(160deg, #ffd8bd, #ffc1d3 55%, #c9b1ff));
   box-shadow:
     inset 0 -6px 12px rgba(70, 20, 110, .35),
     inset 0 1px 0 rgba(255, 255, 255, .6),
-    0 8px 18px -6px rgba(255, 180, 210, .45);
+    0 8px 18px -6px rgba(255, 205, 225, .40);
 }
 /* The glossy highlight across the top half of the orb */
 .card .avatar::before {
