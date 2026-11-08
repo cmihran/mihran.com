@@ -31,8 +31,9 @@
   /* Glass recipe */
   --glass: rgba(255, 255, 255, .07);
   --glass-hover: rgba(255, 255, 255, .11);
-  --glass-strong: rgba(9, 20, 37, .86);   /* popup menu */
-  --glass-bar: rgba(9, 20, 37, .42);      /* top bar */
+  --glass-strong: rgba(9, 20, 37, .80);   /* popup menu */
+  --glass-tint: rgba(9, 20, 37, .30);      /* top bar and page cards */
+  --blur-tint: blur(18px) saturate(115%); /* less color boost, so they don't glow bright blue */
   --glass-solid: #13233a;
   --glass-edge: rgba(255, 255, 255, .14);
   --glass-shine: linear-gradient(180deg, rgba(255, 255, 255, .12) 0%, rgba(255, 255, 255, .02) 50%, rgba(255, 255, 255, 0) 100%);
@@ -48,10 +49,10 @@
 }
 /* No blur support, or the user asked for less transparency: use solid panels. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  :root { --glass: var(--glass-solid); --glass-hover: var(--glass-solid); --glass-strong: var(--glass-solid); --glass-bar: var(--glass-solid); }
+  :root { --glass: var(--glass-solid); --glass-hover: var(--glass-solid); --glass-strong: var(--glass-solid); --glass-tint: var(--glass-solid); }
 }
 @media (prefers-reduced-transparency: reduce) {
-  :root { --glass: var(--glass-solid); --glass-hover: var(--glass-solid); --glass-strong: var(--glass-solid); --glass-bar: var(--glass-solid); }
+  :root { --glass: var(--glass-solid); --glass-hover: var(--glass-solid); --glass-strong: var(--glass-solid); --glass-tint: var(--glass-solid); }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -123,9 +124,9 @@ a { color: inherit; }
   z-index: -1;
   border-radius: inherit;
   /* Darker than the other glass, with less color boost, so the bar doesn't glow bright blue */
-  background-color: var(--glass-bar);
-  -webkit-backdrop-filter: blur(18px) saturate(115%);
-          backdrop-filter: blur(18px) saturate(115%);
+  background-color: var(--glass-tint);
+  -webkit-backdrop-filter: var(--blur-tint);
+          backdrop-filter: var(--blur-tint);
 }
 /* "mihran.com" in the bar, in the same blue-to-aqua gradient as .eyebrow */
 .sidebar .brand {
@@ -267,6 +268,9 @@ main p + p { margin-top: 1em; }
   padding: 20px 22px;
   border-radius: 20px;
   text-decoration: none;
+  background-color: var(--glass-tint);  /* same navy glass as the top bar */
+  -webkit-backdrop-filter: var(--blur-tint);
+          backdrop-filter: var(--blur-tint);
   transition: background-color .2s, box-shadow .2s, transform .2s;
 }
 a.card:hover {
