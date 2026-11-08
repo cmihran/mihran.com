@@ -6,19 +6,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap");
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;  /* one style only: no dark mode */
   --bg-base: #eef7fd;
   --sky:
     radial-gradient(900px 620px at 92% -12%, rgba(120, 200, 255, .55), transparent 62%),
     radial-gradient(820px 620px at -12% 112%, rgba(140, 228, 190, .42), transparent 62%),
     radial-gradient(520px 420px at 45% 45%, rgba(255, 255, 255, .55), transparent 70%),
     linear-gradient(170deg, #e2f1fc 0%, #f4faff 52%, #e8f6f0 100%);
-  /* Background photos:
-     sky-day.webp   Blue sky with clouds, from Unsplash (Unsplash License)
-                    https://images.unsplash.com/photo-1597200381847-30ec200eeb9a
-     sky-night.webp "Sky Clouds Sea" (CC0, Wikimedia Commons)
-                    https://commons.wikimedia.org/wiki/File:Sky_Clouds_Sea.jpg */
-  --sky-photo: url("sky-day.webp");
+  /* Background photo: blue sky with clouds, from Unsplash (Unsplash License)
+     https://images.unsplash.com/photo-1597200381847-30ec200eeb9a */
+  --sky-photo: url("sky.webp");
   --sky-wash: linear-gradient(180deg, rgba(240, 248, 255, .30) 0%, rgba(240, 248, 255, .20) 45%, rgba(236, 245, 252, .60) 100%);
   --fg: #12263a;
   --muted: #34495d;
@@ -49,37 +46,6 @@
   --pad: 40px;       /* side padding inside that column */
   --font-body: "Segoe UI Variable Text", "Segoe UI", "Source Sans 3", -apple-system, system-ui, sans-serif;
   --font-display: "Segoe UI Variable Display", "Segoe UI", "Source Sans 3", -apple-system, system-ui, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-base: #0b1621;
-    --sky:
-      radial-gradient(900px 620px at 92% -12%, rgba(40, 130, 205, .34), transparent 62%),
-      radial-gradient(820px 620px at -12% 112%, rgba(30, 150, 120, .24), transparent 62%),
-      linear-gradient(170deg, #0a1520 0%, #0c1a27 52%, #0a1b1c 100%);
-    --sky-photo: url("sky-night.webp");
-    --sky-wash: linear-gradient(180deg, rgba(8, 16, 26, .55) 0%, rgba(8, 16, 26, .68) 100%);
-    --fg: #e4eef6;
-    --muted: #a9bccc;
-    --text-glow: 0 1px 14px rgba(0, 0, 0, .35);
-    --eyebrow-fill: linear-gradient(90deg, var(--accent), var(--accent-2));
-    --eyebrow-glow: none;
-    --line: rgba(255, 255, 255, .08);
-    --accent: #62bcff;
-    --accent-2: #4fd6c4;
-    --accent-soft: rgba(98, 188, 255, .12);
-    --accent-glow: rgba(98, 188, 255, .18);
-
-    --glass: rgba(255, 255, 255, .055);
-    --glass-hover: rgba(255, 255, 255, .09);
-    --glass-strong: rgba(19, 32, 45, .80);
-    --glass-solid: #13212e;
-    --glass-edge: rgba(255, 255, 255, .11);
-    --glass-shine: linear-gradient(180deg, rgba(255, 255, 255, .09) 0%, rgba(255, 255, 255, 0) 55%);
-    --glass-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, .10),
-      0 12px 32px -8px rgba(0, 0, 0, .45);
-  }
 }
 /* No blur support, or the user asked for less transparency: use solid panels. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -315,7 +281,7 @@ a.card:hover {
 }
 
 /* Brand icons: added automatically to LinkedIn / GitHub links in pills and the menu.
-   Drawn with mask-image so they take the link's current color (incl. hover + dark mode). */
+   Drawn with mask-image so they take the link's current color (incl. hover). */
 .pills a[href*="linkedin.com"]::before,
 .pills a[href*="github.com"]::before,
 .nav a[href*="linkedin.com"]::before,
@@ -342,7 +308,7 @@ footer {
   max-width: calc(var(--page-w) - 2 * var(--pad));
   margin: 0 auto;
   padding: 28px 0;
-  color: var(--fg);  /* full-strength text: the footer sits over the darker sea */
+  color: var(--fg);  /* full-strength text: the footer sits right on the photo */
   font-size: 13px;
   border-top: 1px solid var(--line);
 }
