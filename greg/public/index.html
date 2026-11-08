@@ -63,8 +63,9 @@
     .feature strong { display: block; font-size: 19px; font-weight: 600; }
     .feature span { color: var(--muted); font-size: 15px; }
     .feature em { font-style: normal; color: var(--accent); font-weight: 500; font-size: 15px; display: block; margin-top: 10px; }
-    nav { margin-top: 20px; }
+    nav { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px 20px; }
     nav a { color: var(--muted); font-size: 15px; }
+    nav a:hover { color: var(--accent); }
     footer { text-align: center; color: var(--muted); font-size: 13px; padding: 32px 24px; }
     footer a { color: inherit; }
   </style>
@@ -81,7 +82,10 @@
       <em>kj6er.net →</em>
     </a>
 
-    <nav><a href="https://mihran.com">← Mihran family home</a></nav>
+    <nav>
+      <a href="https://www.linkedin.com/in/gregmihran/">LinkedIn</a>
+      <a href="https://mihran.com">← Mihran family home</a>
+    </nav>
   </main>
   <footer><a href="https://mihran.com">mihran.com</a></footer>
 </body>
