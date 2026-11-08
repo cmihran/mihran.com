@@ -17,19 +17,20 @@
   /* Dusky violet tint over the photo (keeps the sunset pinks instead of turning them gray),
      a little lighter at the top like light through glass */
   --sky-wash:
-    radial-gradient(1200px 700px at 50% -10%, rgba(255, 190, 220, .10), transparent 70%),
+    radial-gradient(1200px 700px at 50% -10%, rgba(255, 232, 242, .10), transparent 70%),
     linear-gradient(180deg, rgba(24, 16, 44, .46) 0%, rgba(18, 12, 34, .64) 100%);
   --fg: #f6f0fa;
   --muted: #cbbfd8;
   --text-glow: 0 1px 14px rgba(0, 0, 0, .35);
-  /* Sunset gradient: peach → pink → lilac (title, bar text, small labels) */
-  --eyebrow-fill: linear-gradient(90deg, #ffc49c 0%, #ff97bf 50%, #c6a8ff 100%);
-  --eyebrow-glow: drop-shadow(0 0 10px rgba(255, 150, 190, .35));
+  /* Sunset gradient: pale peach → blush → pale lilac (title, bar text, small labels).
+     Kept close to white so the pink stays subtle. */
+  --eyebrow-fill: linear-gradient(90deg, #ffdcc4 0%, #ffc4da 50%, #d9c6ff 100%);
+  --eyebrow-glow: drop-shadow(0 0 10px rgba(255, 210, 228, .28));
   --line: rgba(255, 255, 255, .12);
-  --accent: #ffa9c9;
-  --accent-2: #c6a8ff;
-  --accent-soft: rgba(255, 169, 201, .13);
-  --accent-glow: rgba(255, 169, 201, .24);
+  --accent: #ffcde0;
+  --accent-2: #d9c6ff;
+  --accent-soft: rgba(255, 214, 230, .12);
+  --accent-glow: rgba(255, 214, 230, .22);
 
   /* Glass recipe */
   --glass: rgba(255, 255, 255, .08);
@@ -268,12 +269,12 @@ h1 {
           background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-/* Bigger, with a soft pink glow so it pops off the sky.
+/* Bigger, with a soft blush glow so it pops off the sky.
    (text-shadow would paint over the gradient, so this uses drop-shadow filters.) */
 main > h1.gradient-text {
   font-size: clamp(48px, 10vw, 88px);
   text-shadow: none;
-  filter: drop-shadow(0 0 24px rgba(255, 150, 190, .40)) drop-shadow(0 2px 10px rgba(10, 4, 24, .35));
+  filter: drop-shadow(0 0 24px rgba(255, 215, 232, .32)) drop-shadow(0 2px 10px rgba(10, 4, 24, .35));
 }
 h2 {
   font: 600 24px/1.25 var(--font-display);
@@ -330,14 +331,14 @@ a.card:hover {
   overflow: hidden;
   font: 700 26px/1 var(--font-display);
   color: #fff;
-  text-shadow: 0 1px 3px rgba(70, 20, 70, .45);
+  text-shadow: 0 1px 3px rgba(70, 30, 80, .55);
   background:
     radial-gradient(circle at 50% 115%, rgba(255, 255, 255, .45), transparent 55%),  /* glow from below */
-    var(--orb, linear-gradient(160deg, #ffbe94, #ff88b5 55%, #b18cff));
+    var(--orb, linear-gradient(160deg, #ffcfae, #ffadc9 55%, #c3a6ff));
   box-shadow:
     inset 0 -6px 12px rgba(70, 20, 110, .35),
     inset 0 1px 0 rgba(255, 255, 255, .6),
-    0 8px 18px -6px rgba(255, 120, 180, .55);
+    0 8px 18px -6px rgba(255, 180, 210, .45);
 }
 /* The glossy highlight across the top half of the orb */
 .card .avatar::before {
