@@ -23,7 +23,7 @@ Every page loads both from `https://mihran.com/...` and uses this skeleton:
 
 ```html
 <aside class="sidebar" id="site-nav"><a class="brand" href="https://mihran.com/">mihran.com</a></aside>
-<div class="content"><main>…</main><footer>…</footer></div>
+<div class="content"><main>…</main></div>
 ```
 
 The home page (`family/`) is the one exception: its brand link says "Home" instead, because its big title already says "mihran.com" (shown with `<h1 class="gradient-text">`).
