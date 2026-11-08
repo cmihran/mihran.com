@@ -8,68 +8,24 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👋</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #ffffff;
-      --fg: #16181d;
-      --muted: #6b7280;
-      --accent: #2f6fed;
-      --line: #e5e7eb;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0f1115;
-        --fg: #e8eaee;
-        --muted: #9aa1ad;
-        --accent: #7aa2ff;
-        --line: #262a33;
-      }
-    }
-    * { box-sizing: border-box; margin: 0; }
-    body {
-      background: var(--bg);
-      color: var(--fg);
-      font: 400 17px/1.65 Inter, system-ui, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    main {
-      flex: 1;
-      width: 100%;
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 20vh 24px 64px;
-    }
-    h1 { font-size: clamp(36px, 7vw, 52px); font-weight: 600; letter-spacing: -.03em; line-height: 1.1; }
-    .lede { color: var(--muted); font-size: 19px; margin-top: 14px; }
-    nav { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 10px; }
-    nav a {
-      color: var(--fg);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 15px;
-      padding: 9px 16px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      transition: border-color .15s, color .15s;
-    }
-    nav a:hover { border-color: var(--accent); color: var(--accent); }
-    footer { text-align: center; color: var(--muted); font-size: 13px; padding: 32px 24px; }
-    footer a { color: inherit; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://mihran.com/_shared/site.css">
+  <script src="https://mihran.com/_shared/nav.js" defer></script>
 </head>
 <body>
-  <main>
-    <h1>Charlie Mihran</h1>
-    <p class="lede">Hi, I'm Charlie. More coming soon.</p>
-    <nav>
-      <a href="https://www.linkedin.com/in/cmihran/">LinkedIn</a>
-      <a href="https://github.com/cmihran">GitHub</a>
-      <a href="https://mihran.com">Family home</a>
-    </nav>
-  </main>
-  <footer><a href="https://mihran.com">mihran.com</a></footer>
+  <aside class="sidebar" id="site-nav"><a class="brand" href="https://mihran.com/">Mihran</a></aside>
+  <div class="content">
+    <main>
+      <p class="eyebrow">charlie.mihran.com</p>
+      <h1>Charlie Mihran</h1>
+      <p class="lede">Hi, I'm Charlie. More coming soon.</p>
+
+      <nav class="pills" aria-label="Charlie's links">
+        <a href="https://www.linkedin.com/in/cmihran/">LinkedIn</a>
+        <a href="https://github.com/cmihran">GitHub</a>
+      </nav>
+    </main>
+    <footer><a href="https://mihran.com/">mihran.com</a></footer>
+  </div>
 </body>
 </html>

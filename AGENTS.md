@@ -12,6 +12,22 @@ This repo holds the Mihran family's websites on `mihran.com`. Each site is a pla
 | `charlie/` | `charlie-mihran` | `charlie.mihran.com`             | Charlie's personal page            |
 | `greg/`    | `greg-mihran`    | `greg.mihran.com`                | Greg's page (call sign KJ6ER), which links to https://kj6er.net/ |
 
+### Shared style and navigation
+
+All the sites share one look and one sidebar. Both come from files in `family/public/_shared/`, which are served from mihran.com:
+
+- `site.css` (`https://mihran.com/_shared/site.css`): the colors (with automatic light and dark mode), fonts, and layout. That includes the left sidebar, which becomes a top bar with a Menu button on screens narrower than 820px. It also styles the page pieces: `.eyebrow`, `h1`, `.lede`, `.cards`/`.card`, and `.pills`.
+- `nav.js` (`https://mihran.com/_shared/nav.js`): the **only place the sidebar links are defined** (the `SITE` array). It builds the sidebar and highlights the current page.
+
+Every page loads both from `https://mihran.com/...` and uses this skeleton:
+
+```html
+<aside class="sidebar" id="site-nav"><a class="brand" href="https://mihran.com/">Mihran</a></aside>
+<div class="content"><main>…</main><footer>…</footer></div>
+```
+
+To change the style or the sidebar links, edit `_shared/` and **deploy `family/` only**. Every site picks up the change right away. Don't copy the CSS into individual pages.
+
 Every site folder has the same files:
 
 - `public/`: the files that get served. Start with `public/index.html`. Each page is one file with its CSS inline. There's no build step and no framework.
@@ -39,9 +55,9 @@ cd family && cf deploy     # or charlie/, greg/
 
 1. Copy an existing site folder, for example `cp -r charlie <name>`, but skip `node_modules` and `.cloudflare`.
 2. Change the Worker name in `package.json`, `package-lock.json`, and `cloudflare.config.ts`, and set `domains` to `["<name>.mihran.com"]`.
-3. Write `<name>/public/index.html`.
+3. Write `<name>/public/index.html`, using the shared skeleton above.
 4. Run `npm install`, then `cf deploy` in that folder. The custom domain sets up its own DNS record and HTTPS certificate.
-5. Add a card for the person in `family/public/index.html` (in the `.people` grid), and redeploy `family/`.
+5. Add the person to the `SITE` array in `family/public/_shared/nav.js` and add a `.card` for them in `family/public/index.html`. Then redeploy `family/`.
 
 ## Cloudflare setup
 
