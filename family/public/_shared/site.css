@@ -1,45 +1,43 @@
 /* Shared style for every *.mihran.com site.
    Served from https://mihran.com/_shared/site.css — deploy family/ to update.
-   Look: subtle "Frutiger Aero" / liquid glass — sky gradient, frosted panels, soft gloss. */
+   Look: dark "liquid glass": a blurred, tinted sky photo behind frosted panels with a soft gloss.
+   One style only: there is no light mode. */
 
 /* Fallback font for non-Windows (Segoe UI is used where installed). */
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap");
 
 :root {
-  color-scheme: light;  /* one style only: no dark mode */
-  --bg-base: #eef7fd;
-  --sky:
-    radial-gradient(900px 620px at 92% -12%, rgba(120, 200, 255, .55), transparent 62%),
-    radial-gradient(820px 620px at -12% 112%, rgba(140, 228, 190, .42), transparent 62%),
-    radial-gradient(520px 420px at 45% 45%, rgba(255, 255, 255, .55), transparent 70%),
-    linear-gradient(170deg, #e2f1fc 0%, #f4faff 52%, #e8f6f0 100%);
+  color-scheme: dark;
+  --bg-base: #0a1524;
   /* Background photo: blue sky with clouds, from Unsplash (Unsplash License)
      https://images.unsplash.com/photo-1597200381847-30ec200eeb9a */
   --sky-photo: url("sky.webp");
-  --sky-wash: linear-gradient(180deg, rgba(240, 248, 255, .30) 0%, rgba(240, 248, 255, .20) 45%, rgba(236, 245, 252, .60) 100%);
-  --fg: #12263a;
-  --muted: #34495d;
-  /* Soft white glow behind text that sits directly on the sky (the Vista/7 title-bar trick) */
-  --text-glow: 0 0 18px rgba(255, 255, 255, .7), 0 0 3px rgba(255, 255, 255, .5);
-  --eyebrow-fill: linear-gradient(90deg, #0a58a0, #0b7a77);
-  --eyebrow-glow: drop-shadow(0 0 6px rgba(255, 255, 255, .85));
-  --line: rgba(18, 38, 58, .10);
-  --accent: #0a6dbf;
-  --accent-2: #13a19e;
-  --accent-soft: rgba(10, 109, 191, .09);
-  --accent-glow: rgba(10, 109, 191, .16);
+  --sky-blur: 28px;   /* the frosted "liquid glass" blur over the whole photo */
+  /* Navy tint over the blurred photo, a little lighter at the top like light through glass */
+  --sky-wash:
+    radial-gradient(1200px 700px at 50% -10%, rgba(120, 180, 255, .10), transparent 70%),
+    linear-gradient(180deg, rgba(6, 14, 30, .58) 0%, rgba(6, 14, 30, .72) 100%);
+  --fg: #e8f0f8;
+  --muted: #a9bdd0;
+  --text-glow: 0 1px 14px rgba(0, 0, 0, .35);
+  --eyebrow-fill: linear-gradient(90deg, var(--accent), var(--accent-2));
+  --eyebrow-glow: none;
+  --line: rgba(255, 255, 255, .10);
+  --accent: #6cc2ff;
+  --accent-2: #5fe0cf;
+  --accent-soft: rgba(108, 194, 255, .12);
+  --accent-glow: rgba(108, 194, 255, .20);
 
   /* Glass recipe */
-  --glass: rgba(255, 255, 255, .52);
-  --glass-hover: rgba(255, 255, 255, .72);
-  --glass-strong: rgba(255, 255, 255, .80);
-  --glass-solid: #f7fbfe;
-  --glass-edge: rgba(255, 255, 255, .78);
-  --glass-shine: linear-gradient(180deg, rgba(255, 255, 255, .60) 0%, rgba(255, 255, 255, .12) 48%, rgba(255, 255, 255, 0) 100%);
+  --glass: rgba(255, 255, 255, .07);
+  --glass-hover: rgba(255, 255, 255, .11);
+  --glass-strong: rgba(16, 30, 48, .78);
+  --glass-solid: #13233a;
+  --glass-edge: rgba(255, 255, 255, .14);
+  --glass-shine: linear-gradient(180deg, rgba(255, 255, 255, .12) 0%, rgba(255, 255, 255, .02) 50%, rgba(255, 255, 255, 0) 100%);
   --glass-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, .95),
-    0 0 0 1px rgba(20, 70, 110, .05),
-    0 10px 30px -8px rgba(20, 80, 130, .16);
+    inset 0 1px 0 rgba(255, 255, 255, .16),
+    0 12px 32px -8px rgba(0, 0, 0, .45);
   --blur: blur(18px) saturate(170%);
 
   --page-w: 800px;   /* column width for the top bar, content, and footer */
@@ -64,16 +62,22 @@ body {
   display: flex;
   flex-direction: column;
 }
-/* The sky sits on a fixed layer so it doesn't scroll (and works on iOS):
-   a wash for text contrast, over the photo, over the gradient (shown while the photo loads). */
-body::before {
+/* The background is two fixed layers (fixed so they don't scroll, and work on iOS):
+   ::before is the photo, blurred; ::after is the navy tint on top of it. */
+body::before,
+body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: var(--sky-wash), var(--sky-photo) center 30% / cover no-repeat, var(--sky);
   pointer-events: none;
 }
+body::before {
+  background: var(--sky-photo) center / cover no-repeat;
+  filter: blur(var(--sky-blur)) saturate(130%);
+  transform: scale(1.12);  /* hides the soft, see-through edges the blur creates */
+}
+body::after { background: var(--sky-wash); }
 a { color: inherit; }
 ::selection { background: var(--accent-glow); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
