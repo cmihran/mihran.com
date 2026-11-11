@@ -6,13 +6,11 @@ This repo holds Charlie's website on `mihran.com`. Each site is a plain static H
 
 ## Layout
 
-| Folder     | Worker name      | Domains                          | What it is                         |
-|------------|------------------|----------------------------------|------------------------------------|
-| `charlie/` | `charlie-mihran` | `charlie.mihran.com`             | Charlie's personal site: the only real site |
-| `family/`  | `mihran-family`  | `mihran.com`, `www.mihran.com`   | Redirect stub only (see Redirects) |
-| `greg/`    | `greg-mihran`    | `greg.mihran.com`                | Redirect stub only (see Redirects) |
+| Folder     | Worker name      | Domains              | What it is                      |
+|------------|------------------|----------------------|---------------------------------|
+| `charlie/` | `charlie-mihran` | `charlie.mihran.com` | Charlie's personal site: the only site |
 
-`mihran.com` and `greg.mihran.com` don't serve pages any more: a zone redirect rule sends them to `charlie.mihran.com` and `kj6er.net`. Their Workers still exist because their custom domains are what create the proxied DNS records the redirect rules depend on. **Don't delete those Workers or their domains.**
+`mihran.com`, `www.mihran.com` and `greg.mihran.com` have no site: zone redirect rules send them elsewhere (see Redirects).
 
 ### Charlie's site (`charlie/`)
 
@@ -81,7 +79,7 @@ Two zone redirect rules (phase `http_request_dynamic_redirect`, status 302, path
 - `mihran.com` and `www.mihran.com` → `https://charlie.mihran.com/`
 - `greg.mihran.com` → `https://kj6er.net/`
 
-They are 302s (not 301s) on purpose, so browsers don't cache them permanently. View them with `cf rulesets entrypoint get http_request_dynamic_redirect --zone mihran.com`. Change them with `cf rulesets entrypoint update http_request_dynamic_redirect --zone mihran.com --body '<json>'`, which replaces the whole rule list, so send every rule. The `family/` and `greg/` pages are meta-refresh stubs that only matter if a rule is removed.
+They are 302s (not 301s) on purpose, so browsers don't cache them permanently. Cloudflare only runs redirect rules for traffic through a proxied DNS record, so `mihran.com`, `www` and `greg` each have a proxied placeholder `AAAA 100::` record with no Worker behind it. Don't delete those records or the redirects stop working. View them with `cf rulesets entrypoint get http_request_dynamic_redirect --zone mihran.com`. Change them with `cf rulesets entrypoint update http_request_dynamic_redirect --zone mihran.com --body '<json>'`, which replaces the whole rule list, so send every rule.
 
 ### Email Routing (forwarding only)
 
