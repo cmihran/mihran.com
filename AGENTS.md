@@ -34,7 +34,7 @@ Every site folder has the same files:
 
 ## Local preview
 
-Run `node preview.mjs` from the repo root (no dependencies) and open http://localhost:4321/. Each site is served at `http://<name>.localhost:4321/` (Charlie's is http://charlie.localhost:4321/). Pass a port as an argument if 4321 is taken.
+Run `node preview.mjs` from the repo root (no dependencies) and open http://localhost:4321/ (Charlie's site is the default). Each site folder is also served at `http://<name>.localhost:4321/`. Pass a port as an argument if 4321 is taken.
 
 To open it on a phone on the same network, use the PC's LAN IP with a path prefix: `http://<LAN-IP>:4321/~charlie/`. (Hostname tricks like nip.io fail on networks that block DNS answers pointing at private IPs, so the server uses paths instead.) The local preview doesn't apply the Cloudflare redirect rules.
 

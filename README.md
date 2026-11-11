@@ -11,10 +11,10 @@ Charlie's personal site, a one-page-scroll site with an animated starfield backg
 ## Preview locally
 
 ```sh
-node preview.mjs     # then open http://charlie.localhost:4321/
+node preview.mjs     # then open http://localhost:4321/
 ```
 
-To view it on a phone on the same network, use `http://<your-LAN-IP>:4321/~charlie/`.
+To view it on a phone on the same network, use `http://<your-LAN-IP>:4321/`.
 
 ## Editing and deploying
 

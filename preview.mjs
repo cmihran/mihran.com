@@ -1,8 +1,8 @@
-// Local preview of all the *.mihran.com sites, using your working copy.
+// Local preview of the sites in this repo (one folder per site), using your working copy.
 //   node preview.mjs [port]      (default port 4321)
-// Then open http://localhost:4321/ — other sites are at http://<name>.localhost:4321/.
-// From a phone on the same network, use your PC's LAN IP with a /~name/ path:
-//   http://<LAN-IP>:4321/ (family),  http://<LAN-IP>:4321/~charlie/,  http://<LAN-IP>:4321/~greg/
+// Then open http://localhost:4321/ (Charlie's site, the default) or http://<name>.localhost:4321/.
+// From a phone on the same network, use your PC's LAN IP: http://<LAN-IP>:4321/ or
+// http://<LAN-IP>:4321/~<name>/ (a path prefix picks the site, since hostnames can't).
 // Every "https://…mihran.com" URL in HTML/CSS/JS is rewritten to the local server,
 // so any cross-site links stay on the local server instead of going to production.
 import { createServer } from "node:http";
@@ -56,7 +56,7 @@ createServer(async (req, res) => {
       pathname = m[2];
     }
   }
-  const site = sub && sub !== "www" ? sub : "family";
+  const site = sub && sub !== "www" ? sub : "charlie";
   let file = normalize(join(root, site, "public", decodeURIComponent(pathname)));
   if (!file.startsWith(join(root, site, "public"))) return send(res, 403, "Forbidden");
   try {
@@ -71,7 +71,9 @@ createServer(async (req, res) => {
   }
 }).listen(port, () => {
   const o = (sub) => `http://${sub ? sub + "." : ""}localhost:${port}`;
-  console.log(`Preview running:\n  ${o()}/\n  ${o("charlie")}/\n  ${o("greg")}/`);
+  console.log(`Preview running:
+  ${o()}/
+  ${o("charlie")}/`);
 });
 
 function send(res, code, msg) {
