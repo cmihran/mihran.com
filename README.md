@@ -1,23 +1,31 @@
 # mihran.com
 
-The Mihran family's websites. They're plain static HTML pages hosted on Cloudflare Workers.
+Charlie's personal site, a one-page-scroll site with an animated starfield background. It's a single static HTML file hosted on Cloudflare Workers, with no build step.
 
 | Site | Folder |
 |---|---|
-| [mihran.com](https://mihran.com) | `family/` |
 | [charlie.mihran.com](https://charlie.mihran.com) | `charlie/` |
-| [greg.mihran.com](https://greg.mihran.com) | `greg/` |
+
+`mihran.com` and `www.mihran.com` redirect to `charlie.mihran.com`, and `greg.mihran.com` redirects to [kj6er.net](https://kj6er.net/). These are Cloudflare redirect rules, not sites in this repo.
+
+## Preview locally
+
+```sh
+node preview.mjs     # then open http://charlie.localhost:4321/
+```
+
+To view it on a phone on the same network, use `http://<your-LAN-IP>:4321/~charlie/`.
 
 ## Editing and deploying
 
-Edit `<site>/public/index.html`, then deploy that site:
+Edit `charlie/public/index.html`. Projects shown on the Projects page are listed in the `PROJECTS` array near the top of its script. Then deploy:
 
 ```sh
 npm install -g cf    # Cloudflare CLI (one-time)
 cf auth login        # one-time
-cd family && npm install && cf deploy
+cd charlie && npm install && cf deploy
 ```
 
 Pushing to GitHub does not deploy anything. You have to run the deploy command yourself.
 
-For the full setup, including DNS, email forwarding, and adding a new subdomain, see [AGENTS.md](AGENTS.md).
+For the full setup, including DNS, redirects, email forwarding, and adding a new subdomain, see [AGENTS.md](AGENTS.md).
