@@ -4,7 +4,7 @@
 // From a phone on the same network, use your PC's LAN IP with a /~name/ path:
 //   http://<LAN-IP>:4321/ (family),  http://<LAN-IP>:4321/~charlie/,  http://<LAN-IP>:4321/~greg/
 // Every "https://…mihran.com" URL in HTML/CSS/JS is rewritten to the local server,
-// so the shared CSS and nav come from family/public/_shared on disk, not production.
+// so any cross-site links stay on the local server instead of going to production.
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { join, extname, normalize } from "node:path";

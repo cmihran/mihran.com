@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This repo holds the Mihran family's websites on `mihran.com`. Each site is a plain static HTML site, and each one is deployed as its own Cloudflare Worker.
+This repo holds Charlie's website on `mihran.com`. Each site is a plain static HTML site, and each one is deployed as its own Cloudflare Worker.
 
 > **Both the repo and the sites are public.** The GitHub repo `cmihran/mihran.com` is public, and so is everything served from `mihran.com` and its subdomains. Never commit secrets, tokens, account IDs, or personal email addresses, and don't put them in commit messages. Look them up with `cf` when you need them. Remember that git history is public too: removing something in a later commit doesn't hide it.
 
@@ -8,31 +8,26 @@ This repo holds the Mihran family's websites on `mihran.com`. Each site is a pla
 
 | Folder     | Worker name      | Domains                          | What it is                         |
 |------------|------------------|----------------------------------|------------------------------------|
-| `family/`  | `mihran-family`  | `mihran.com`, `www.mihran.com`   | Family homepage, with a card for each person's site |
-| `charlie/` | `charlie-mihran` | `charlie.mihran.com`             | Charlie's personal page            |
-| `greg/`    | `greg-mihran`    | `greg.mihran.com`                | Greg's page (call sign KJ6ER), which links to https://kj6er.net/ |
+| `charlie/` | `charlie-mihran` | `charlie.mihran.com`             | Charlie's personal site: the only real site |
+| `family/`  | `mihran-family`  | `mihran.com`, `www.mihran.com`   | Redirect stub only (see Redirects) |
+| `greg/`    | `greg-mihran`    | `greg.mihran.com`                | Redirect stub only (see Redirects) |
 
-### Shared style and navigation
+`mihran.com` and `greg.mihran.com` don't serve pages any more: a zone redirect rule sends them to `charlie.mihran.com` and `kj6er.net`. Their Workers still exist because their custom domains are what create the proxied DNS records the redirect rules depend on. **Don't delete those Workers or their domains.**
 
-All the sites share one look and one navigation menu. Both come from files in `family/public/_shared/`, which are served from mihran.com:
+### Charlie's site (`charlie/`)
 
-- `site.css` (`https://mihran.com/_shared/site.css`): the colors, fonts, and layout. The style is a dark "liquid glass" look: a pastel sunset photo (`_shared/sky.webp`) shown softly blurred and muted under a dusky slate tint, with frosted-glass panels on top and a pale peach-to-lilac gradient for the title and labels. There is one style only, with no light mode. The blur strength is `--sky-blur`, the tint is `--sky-wash`, and the gradient is `--eyebrow-fill`. A card can show a glossy initial "orb" placeholder avatar: add `<span class="avatar" aria-hidden="true">X</span>` as the card's first child. The navigation is a floating glass bar at the top of every page, with a burger (☰) button that opens a popup menu. The `<aside>` still has `class="sidebar"` for historical reasons. The stylesheet also styles the page pieces: `.eyebrow`, `h1`, `.lede`, `.cards`/`.card`, and `.pills`. LinkedIn and GitHub links in `.pills` or the menu get their brand icon automatically, matched by the link's `href`, so don't add icon markup. To support another site, add a matching `a[href*="…"] { --icon: url(...) }` rule.
-- `nav.js` (`https://mihran.com/_shared/nav.js`): the **only place the menu links are defined** (the `SITE` array). It builds the burger button and popup menu and highlights the current page.
+`charlie/public/index.html` is one self-contained file (CSS and JS inline, no build step, no libraries). It's a one-page-scroll site:
 
-Every page loads both from `https://mihran.com/...` and uses this skeleton:
-
-```html
-<aside class="sidebar" id="site-nav"><a class="brand" href="https://mihran.com/">mihran.com</a></aside>
-<div class="content"><main>…</main></div>
-```
-
-The home page (`family/`) is the one exception: its brand link says "Home" instead, because its big title already says "mihran.com" (shown with `<h1 class="gradient-text">`).
-
-To change the style or the menu links, edit `_shared/` and **deploy `family/` only**. Every site picks up the change right away. Don't copy the CSS into individual pages.
+- A fixed black `<canvas>` starfield sits behind everything and is never reset. The pages (Home, Projects, Links) float over it, and changing page glides the starfield's "camera" so the background feels persistent. Stars drift, twinkle and push away from the cursor, with a gentle sway when there is no pointer.
+- Pages change with the pill nav, mouse wheel, swipe or arrow keys (one page per gesture). The URL hash tracks the current page.
+- The Projects page is a stack of light 3D cards that tilt toward the cursor, next to a numbered list. **Projects are defined in the `PROJECTS` array at the top of the script.** Each takes `name`, `repo`, `desc`, `tags` and an optional `url`. This is where web projects without their own URL are meant to be hosted: put a built static project under `charlie/public/<project>/` and link it with `url`.
+- Style: pure black, white particles, no gradients or color accents. Fonts are Inter (sans), Newsreader italic (serif accents) and JetBrains Mono (labels), loaded from Google Fonts.
+- Performance: a single `requestAnimationFrame` loop that pauses in hidden tabs, particle count scaled to screen size (fewer on phones), pixel ratio capped, and a static frame under `prefers-reduced-motion`.
+- `logo.svg` (white mark) and `favicon.svg` (white mark on a black tile) are the CM monogram. The logo is also inlined in the header.
 
 Every site folder has the same files:
 
-- `public/`: the files that get served. Start with `public/index.html`. Each page is one file with its CSS inline. There's no build step and no framework.
+- `public/`: the files that get served. Start with `public/index.html`.
 - `cloudflare.config.ts`: the Worker name, its custom domains (`domains: [...]`), and its compatibility date.
 - `wrangler.config.ts`: sets `assetsDirectory: "public"`. It was generated, so leave it alone.
 - `package.json`: has `cf` and `wrangler` as dev dependencies. It must keep `"type": "module"`.
@@ -41,7 +36,9 @@ Every site folder has the same files:
 
 ## Local preview
 
-Run `node preview.mjs` from the repo root (no dependencies) and open http://localhost:4321/. Each person's site is served at `http://<name>.localhost:4321/`. The server rewrites every `https://…mihran.com` URL to the local server, so the pages use `_shared/` from your working copy instead of production. Pass a port as an argument if 4321 is taken.
+Run `node preview.mjs` from the repo root (no dependencies) and open http://localhost:4321/. Each site is served at `http://<name>.localhost:4321/` (Charlie's is http://charlie.localhost:4321/). Pass a port as an argument if 4321 is taken.
+
+To open it on a phone on the same network, use the PC's LAN IP with a path prefix: `http://<LAN-IP>:4321/~charlie/`. (Hostname tricks like nip.io fail on networks that block DNS answers pointing at private IPs, so the server uses paths instead.) The local preview doesn't apply the Cloudflare redirect rules.
 
 ## Working rules
 
@@ -53,7 +50,7 @@ Run `node preview.mjs` from the repo root (no dependencies) and open http://loca
 Deploys use Cloudflare's `cf` CLI, which is still in beta. Each site deploys separately from its own folder:
 
 ```sh
-cd family && cf deploy     # or charlie/, greg/
+cd charlie && cf deploy
 ```
 
 - Run `cf auth whoami` to check the login. If it has expired, ask the user to run `! cf auth login`.
@@ -62,13 +59,12 @@ cd family && cf deploy     # or charlie/, greg/
 - After a deploy, check the result with `curl -s https://<host> | grep '<title>'`.
 - Nothing deploys automatically when you push to git. Deploying is always a manual step.
 
-### Adding a new person's subdomain
+### Adding a new subdomain site
 
 1. Copy an existing site folder, for example `cp -r charlie <name>`, but skip `node_modules` and `.cloudflare`.
 2. Change the Worker name in `package.json`, `package-lock.json`, and `cloudflare.config.ts`, and set `domains` to `["<name>.mihran.com"]`.
-3. Write `<name>/public/index.html`, using the shared skeleton above.
+3. Write `<name>/public/index.html`.
 4. Run `npm install`, then `cf deploy` in that folder. The custom domain sets up its own DNS record and HTTPS certificate.
-5. Add the person to the `SITE` array in `family/public/_shared/nav.js` and add a `.card` for them in `family/public/index.html`. Then redeploy `family/`.
 
 ## Cloudflare setup
 
@@ -77,6 +73,15 @@ cd family && cf deploy     # or charlie/, greg/
 - The zone setting `always_use_https` is on, so every HTTP request redirects to HTTPS.
 - Custom domains create the Worker DNS records automatically. They're the AAAA `100::` records, so don't edit them by hand.
 - Costs: everything here is on the free tier. Requests for static files are free and unlimited. Free-plan limits are 100 Workers, 100 custom domains per zone, and 20,000 files per site.
+
+### Redirects
+
+Two zone redirect rules (phase `http_request_dynamic_redirect`, status 302, path and query preserved):
+
+- `mihran.com` and `www.mihran.com` → `https://charlie.mihran.com/`
+- `greg.mihran.com` → `https://kj6er.net/`
+
+They are 302s (not 301s) on purpose, so browsers don't cache them permanently. View them with `cf rulesets entrypoint get http_request_dynamic_redirect --zone mihran.com`. Change them with `cf rulesets entrypoint update http_request_dynamic_redirect --zone mihran.com --body '<json>'`, which replaces the whole rule list, so send every rule. The `family/` and `greg/` pages are meta-refresh stubs that only matter if a rule is removed.
 
 ### Email Routing (forwarding only)
 
