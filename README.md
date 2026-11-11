@@ -1,6 +1,4 @@
-<img src="charlie/public/favicon.svg" alt="CM monogram logo" width="56" height="56">
-
-# mihran.com
+# <img src="charlie/public/favicon.svg" alt="CM logo" width="36" height="36" align="center"> mihran.com
 
 Charlie's personal site, a one-page-scroll site with an animated starfield background. It's a single static HTML file hosted on Cloudflare Workers, with no build step.
 
