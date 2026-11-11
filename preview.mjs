@@ -71,9 +71,7 @@ createServer(async (req, res) => {
   }
 }).listen(port, () => {
   const o = (sub) => `http://${sub ? sub + "." : ""}localhost:${port}`;
-  console.log(`Preview running:
-  ${o()}/
-  ${o("charlie")}/`);
+  console.log(`Preview running:\n  ${o()}/\n  ${o("charlie")}/`);
 });
 
 function send(res, code, msg) {
